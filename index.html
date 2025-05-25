@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HartCast by Tracy Hart</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      color: #00ffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 20px;
+      color: #ff00ff;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    p {
+      max-width: 700px;
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    #video-container {
+      width: 100%;
+      max-width: 900px;
+      height: 600px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+      margin-bottom: 20px;
+    }
+
+    #chat {
+      width: 100%;
+      max-width: 900px;
+      background-color: #1e1e2f;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+      padding: 15px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: 200px;
+      margin-bottom: 10px;
+    }
+
+    #chat input {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    #username {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #cccccc;
+      opacity: 0.7;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>HartCast: Broadcast Like a Legend</h1>
+  <p>
+    Welcome to HartCast — the broadcast headquarters of Tracy Hart. This isn’t just a call, it’s a performance.
+    Go live. Be seen. Make the moment count. All eyes on you.
+  </p>
+
+  <div id="video-container"></div>
+
+  <div id="chat">
+    <input id="username" type="text" placeholder="Enter your name..." />
+    <div id="messages"></div>
+    <input id="messageInput" type="text" placeholder="Type a message and hit Enter" />
+  </div>
+
+  <footer>
+    © 2025 HartCast Network | Powered by Wondervale Signalworks
+  </footer>
+
+  <script src="https://unpkg.com/@daily-co/daily-js"></script>
+  <script>
+    const usernameInput = document.getElementById('username');
+    const messageInput = document.getElementById('messageInput');
+    const messagesDiv = document.getElementById('messages');
+
+    // Initialize Daily video call
+    const callFrame = window.DailyIframe.createFrame({
+      showLeaveButton: true,
+      iframeStyle: {
+        width: '100%',
+        height: '100%',
+        border: '0',
+        borderRadius: '15px'
+      }
+    });
+
+    callFrame.join({ url: 'https://hartline.daily.co/HartLine' });
+    document.getElementById('video-container').appendChild(callFrame.iframe());
+
+    // Mock chat functionality (temporary)
+    messageInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && messageInput.value.trim() !== '') {
+        const username = usernameInput.value.trim() || 'Guest';
+        const message = messageInput.value.trim();
+        const messageEl = document.createElement('div');
+        messageEl.textContent = `${username}: ${message}`;
+        messagesDiv.appendChild(messageEl);
+        messageInput.value = '';
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>
