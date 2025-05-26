@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HartCast by Tracy Hart</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      color: #00ffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 20px;
+      color: #ff00ff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff, 0 0 30px #00ffff;
+      animation: flicker 1.5s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      100% { opacity: 0.8; text-shadow: 0 0 20px #ff00ff, 0 0 30px #00ffff; }
+    }
+
+    p {
+      max-width: 700px;
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    #video-container {
+      width: 100%;
+      max-width: 900px;
+      height: 600px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.5rem;
+      position: relative;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #cccccc;
+      opacity: 0.7;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>HartCast: The Future of the Call</h1>
+  <p>
+    Welcome to HartCast — a next-gen broadcast experience hosted by the legend himself.
+    The lights are hot, the signal is strong, and the vibes? Electric.
+  </p>
+
+  <div id="video-container">
+    Your camera feed will appear here.
+  </div>
+
+  <footer>
+    © 2025 HartCast Media | Powered by Wondervale Signalworks
+  </footer>
+
+  <script>
+    async function startCamera() {
+      const videoContainer = document.getElementById('video-container');
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        const videoElem = document.createElement('video');
+        videoElem.autoplay = true;
+        videoElem.playsInline = true;
+        videoElem.muted = true; // mute to avoid echo
+        videoElem.srcObject = stream;
+
+        // Clear placeholder text and add video
+        videoContainer.innerHTML = '';
+        videoContainer.appendChild(videoElem);
+      } catch (err) {
+        videoContainer.textContent = 'Error accessing camera/mic: ' + err.message;
+        console.error('Camera/mic error:', err);
+      }
+    }
+
+    // Start camera as soon as page loads
+    window.addEventListener('load', () => {
+      startCamera();
+      console.log("HartCast loaded and camera started.");
+    });
+  </script>
+</body>
+</html>
+

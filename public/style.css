@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+  color: #00ffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-top: 20px;
+  color: #ff00ff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+#video-container {
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #cccccc;
+  opacity: 0.7;
+}
